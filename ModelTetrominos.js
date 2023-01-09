@@ -49,7 +49,6 @@ class ModelTetrominos {
     this.value = Math.floor(Math.random() * 7);
 
     this.matrice = ModelTetrominos.tetrominos[this.value];
-    console.log(this.matrice);
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
         this.matrice[i][j] = this.matrice[i][j] * this.value;
@@ -62,7 +61,7 @@ class ModelTetrominos {
     let invers = [[], [], [], []];
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
-        invers[i][j] = mat[3 - j][i];
+        invers[i][j] = this.matrice[3 - j][i];
       }
     }
     this.matrice = invers;

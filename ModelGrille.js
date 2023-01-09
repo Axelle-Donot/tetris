@@ -155,6 +155,8 @@ class ModelGrille {
 
   //verifie si la grille est terminee ou non
   verifGrilleFIni() {}
+
+  
   //verifier si le tetrominos a fini sa descente pour passer au suivant
   verifTetrominos(tetrominos) {
     console.log(this.matrice);
