@@ -9,52 +9,32 @@
     <title>Document</title>
 
     <style>
-      * {
+      canvas {
         box-sizing: border-box;
+        border: 1px solid white;
         margin: 0;
         padding: 0;
       }
-
-      body {
-        background: rgb(18, 18, 18);
+      * body {
+        background: rgb(151, 151, 151);
         color: rgb(255, 255, 255);
         display: flex;
         align-items: center;
         justify-content: center;
         min-height: 100vh;
       }
-
-      .container__0 {
-        background: rgba(255, 255, 255, 0.05);
-        border-radius: 5px;
-        text-align: center;
-        padding: 10px;
-        width: 500px;
-      }
-
-      .container__0 p {
-        padding: 20px;
-      }
-
-      .container__0 button {
-        background: rgb(3, 218, 197);
-        border: none;
-        border-radius: 5px;
-        cursor: pointer;
-        padding: 5px 10px;
-        letter-spacing: 1px;
-        text-transform: uppercase;
-      }
     </style>
   </head>
   <body id="body">
-    <canvas width=576 height=576 id="canvas"></canvas>
+    <canvas width="576" height="576" id="mycanvas"></canvas>
+
 
 	<script  src="action.js"></script> 	
   <script  src="ModelTetrominos.js"></script>   
   <script  src="ModelGrille.js"></script> 
   <script  src="Controller.js"></script> 
   <script  src="View.js"></script> 
+  <script  src="grille.js"></script> 
   <script>    const app = new Controller(new ModelTetrominos(),new ModelGrille(), new View()) 
 </script>
 <script src="canvas.js"></script> 

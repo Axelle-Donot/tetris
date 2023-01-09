@@ -8,6 +8,7 @@ class Controller {
   creationGrille() {
     this.grille = new ModelGrille();
     this.creationTetrominos();
+   // lancement();
   }
   creationTetrominos() {
     this.tetrominos = new ModelTetrominos();
