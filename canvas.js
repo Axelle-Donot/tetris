@@ -70,7 +70,7 @@ document.addEventListener("keydown", function (event) {
   } else if (event.code == "Space") {
     app.descendreRapidement();
   }
-  app.verifierTetrominos();
+  app.verifierLigneEntiere();
 });
 
 function supprimerLignes(tabLignes){

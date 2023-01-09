@@ -148,7 +148,7 @@ class ModelGrille {
 
   descendreRapidement(tetrominos) {
     let bool = true;
-    while (bool && tetrominos.coordonnes[0] < 24) {
+    while (bool && tetrominos.coordonnes[0]+tetrominos.nbLigne-1 < 24) {
       bool = this.descendre(tetrominos);
     }
   }
@@ -159,19 +159,19 @@ class ModelGrille {
   
   //verifier si le tetrominos a fini sa descente pour passer au suivant
   verifTetrominos(tetrominos) {
-    console.log(this.matrice);
+
     let coordT = tetrominos.coordonnes;
-    console.log(coordT);
-    if (coordT[0] + tetrominos.nbLigne >= 24) {
+    if (coordT[0] + tetrominos.nbLigne >= 25) {
       return true;
     } else {
+
       for (let i = 0; i < tetrominos.nbLigne; i++) {
         for (let j = 0; j < tetrominos.nbColonne; j++) {
-          if (
-            tetrominos.matricePetite[i][j] > 0 &&
-            (i == tetrominos.nbLigne - 1 ||
-              tetrominos.matricePetite[i + 1][j] == 0)
-          ) {
+          if (  tetrominos.matricePetite[i][j] > 0 && (i == tetrominos.nbLigne - 1 ||  tetrominos.matricePetite[i + 1][j] == 0) ) {
+           console.log(this.matrice[i + coordT[0] + 1][j + coordT[1]])
+           console.log(this.matrice)
+           console.log(1+i+coordT[0])
+           console.log(j+coordT[1])
             if (this.matrice[i + coordT[0] + 1][j + coordT[1]] > 0) {
               return true;
             }

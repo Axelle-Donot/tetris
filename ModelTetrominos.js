@@ -1,6 +1,6 @@
 class ModelTetrominos {
   static tetrominos = {
-    0: [
+    7: [
       [0, 0, 0, 0],
       [0, 0, 0, 0],
       [1, 1, 1, 1],
@@ -46,12 +46,14 @@ class ModelTetrominos {
 
   constructor() {
     this.coordonnes = [0, 4];
-    this.value = Math.floor(Math.random() * 7);
+    this.value = Math.floor(Math.random() * 7)+1;
 
     this.matrice = ModelTetrominos.tetrominos[this.value];
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
-        this.matrice[i][j] = this.matrice[i][j] * this.value;
+        if (this.matrice[i][j] !== 0){
+          this.matrice[i][j] = this.value;
+        }
       }
     }
     this.getNewMatrice();

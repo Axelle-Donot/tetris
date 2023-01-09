@@ -17,22 +17,42 @@ class Controller {
   }
 
   descendreRapidement() {
-    this.grille.descendreRapidement(this.tetrominos);
-    afficherGrille();
+   if(!this.grille.verifTetrominos(this.tetrominos)){
+      this.grille.descendreRapidement(this.tetrominos);
+   }
+    this.creationTetrominos();
   }
 
   descendre() {
-    this.grille.descendre(this.tetrominos);
+    console.log(this.grille.verifTetrominos(this.tetrominos));
+
+    if(!this.grille.verifTetrominos(this.tetrominos)){
+     this.grille.descendre(this.tetrominos);
+    }else{
+      this.creationTetrominos();
+    }
+    console.log(this.grille.verifTetrominos(this.tetrominos));
+    if(this.grille.verifTetrominos(this.tetrominos)){
+      this.creationTetrominos();
+    }
     afficherGrille();
   }
 
   droite() {
-    this.grille.deplacerDroite(this.tetrominos);
+    if(!this.grille.verifTetrominos(this.tetrominos)){
+     this.grille.deplacerDroite(this.tetrominos);
+    }else{
+      this.creationTetrominos();
+    }
     afficherGrille();
   }
 
   gauche() {
-    this.grille.deplacerGauche(this.tetrominos);
+    if(!this.grille.verifTetrominos(this.tetrominos)){
+      this.grille.deplacerGauche(this.tetrominos);
+    }else{
+      this.creationTetrominos();
+    }
     afficherGrille();
   }
 
@@ -48,7 +68,6 @@ class Controller {
   }
 
   verifierTetrominos() {
-    console.log(this.grille.verifTetrominos(this.tetrominos));
     afficherGrille();
   }
 
