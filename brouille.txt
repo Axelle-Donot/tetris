@@ -1,0 +1,11 @@
+- taille de la grille : 10 *25
+- vérifier si le tetrominos a touché le fond
+
+-couleur :
+    1 bleu clair 
+    2 jaune
+    3 violet
+    4 orange
+    5 bleu foncé
+    6 rouge
+    7 vert

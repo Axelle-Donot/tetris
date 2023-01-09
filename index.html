@@ -47,15 +47,19 @@
       }
     </style>
   </head>
-  <body>
-    <div id="mvc" class="container__0"></div>
+  <body id="body">
+    <canvas width=576 height=576 id="canvas"></canvas>
 
-    <script>
+	<script  src="action.js"></script> 	
+  <script  src="ModelTetrominos.js"></script>   
+  <script  src="ModelGrille.js"></script> 
+  <script  src="Controller.js"></script> 
+  <script  src="View.js"></script> 
+  <script>    const app = new Controller(new ModelTetrominos(),new ModelGrille(), new View()) 
+</script>
+<script src="canvas.js"></script> 
 
-      //const app = new Controller(new Model(), new View("mvc"));
-      var tetrominos = new ModelTetrominos();
-      var t = tetrominos.get();
-      console.log(tetrominos.getNewMatrice());
-    </script>
+
+    <button onclick="app.creationGrille()">Test de bouton</button>
   </body>
 </html>
