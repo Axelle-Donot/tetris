@@ -4,6 +4,7 @@ var canvas = document.getElementById("mycanvas");
 var contextGrille = canvas.getContext("2d");
 
 contextGrille.strokeStyle = "White";
+contextGrille.fillStyle = 'white';
 contextGrille.font = "40px serif";
 contextGrille.fillText("Tetris", 25, 40);
 contextGrille.strokeStyle = "green";
@@ -15,7 +16,7 @@ contextGrille.fillText("SCORE", 400, 200);
 contextGrille.fillText("Active IA", 400, 300);
 
 contextGrille.beginPath();
-contextGrille.strokeStyle = "grey";
+contextGrille.strokeStyle = "black";
 contextGrille.lineWidth = 1;
 for (let i = 0; i < 475; i += 20) {
   contextGrille.moveTo(100, 70 + i);

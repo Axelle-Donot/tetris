@@ -3,38 +3,39 @@ class Controller {
     this.modelTetrominos = modelTetrominos;
     this.modelGrille = modelGrille;
     this.view = view;
+    this.timing=false;
   }
 
   creationGrille() {
     this.grille = new ModelGrille();
     this.creationTetrominos();
-   // lancement();
+    lancement();
   }
   creationTetrominos() {
-    this.tetrominos = new ModelTetrominos();
+    if(!this.timing){
+      this.tetrominos = new ModelTetrominos();
     this.grille.ajouterTetrominos(this.tetrominos);
     afficherGrille();
+    }
+    
   }
 
   descendreRapidement() {
    if(!this.grille.verifTetrominos(this.tetrominos)){
       this.grille.descendreRapidement(this.tetrominos);
    }
-    this.creationTetrominos();
+   this.verifierLigneEntiere()
   }
 
   descendre() {
-    console.log(this.grille.verifTetrominos(this.tetrominos));
-
     if(!this.grille.verifTetrominos(this.tetrominos)){
      this.grille.descendre(this.tetrominos);
+     this.verifierLigneEntiere()
+
     }else{
-      this.creationTetrominos();
+      this.verifierLigneEntiere()
     }
-    console.log(this.grille.verifTetrominos(this.tetrominos));
-    if(this.grille.verifTetrominos(this.tetrominos)){
-      this.creationTetrominos();
-    }
+
     afficherGrille();
   }
 
@@ -42,7 +43,7 @@ class Controller {
     if(!this.grille.verifTetrominos(this.tetrominos)){
      this.grille.deplacerDroite(this.tetrominos);
     }else{
-      this.creationTetrominos();
+      this.verifierLigneEntiere()
     }
     afficherGrille();
   }
@@ -51,7 +52,7 @@ class Controller {
     if(!this.grille.verifTetrominos(this.tetrominos)){
       this.grille.deplacerGauche(this.tetrominos);
     }else{
-      this.creationTetrominos();
+      this.verifierLigneEntiere()
     }
     afficherGrille();
   }
@@ -61,14 +62,19 @@ class Controller {
   }
 
   verifierLigneEntiere() {
-    let value = this.grille.verifLigne();
-    if (value != false) {
-      this.grille.suppLigne(value);
-    }
-  }
+    this.ligneASupp = this.grille.verifLigne();
+    if (this.ligneASupp != false && this.grille.verifTetrominos(this.tetrominos)) {
+      this.timing=true;
+      supprimerLignes(this.ligneASupp)
+      setTimeout(function() {
+        app.timing=false;
+        app.grille.suppLigne(app.ligneASupp);
+    },300)
+    this.creationTetrominos();
 
-  verifierTetrominos() {
-    afficherGrille();
+    }else if (this.grille.verifTetrominos(this.tetrominos)){
+      this.creationTetrominos();
+    }
   }
 
   rotation() {}

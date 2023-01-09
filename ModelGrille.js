@@ -168,10 +168,6 @@ class ModelGrille {
       for (let i = 0; i < tetrominos.nbLigne; i++) {
         for (let j = 0; j < tetrominos.nbColonne; j++) {
           if (  tetrominos.matricePetite[i][j] > 0 && (i == tetrominos.nbLigne - 1 ||  tetrominos.matricePetite[i + 1][j] == 0) ) {
-           console.log(this.matrice[i + coordT[0] + 1][j + coordT[1]])
-           console.log(this.matrice)
-           console.log(1+i+coordT[0])
-           console.log(j+coordT[1])
             if (this.matrice[i + coordT[0] + 1][j + coordT[1]] > 0) {
               return true;
             }
@@ -198,7 +194,7 @@ class ModelGrille {
       }
       nbParLigne = 0;
     }
-    if (tab[0] != undefined) {
+    if (tab[0] !== undefined) {
       return tab;
     } else {
       return false;
@@ -207,18 +203,21 @@ class ModelGrille {
 
   //supprimer les lignes
   suppLigne(tab) {
-    this.calculScore(length(tab));
-    for (let i = 0; i < length(tab); i++) {
-      modifLigne(tab[i]);
+    this.calculScore(tab.length);
+    for (let i = 0; i < tab.length; i++) {
+      this.modifLigne(tab[i]);
     }
-    return this.matrice;
   }
 
   //modifier les lignes
   modifLigne(nb) {
-    for (nb; nb > 0; nb--) {
-      for (let j; j < 10; j++) {
-        this.matrice[nb][j] = this.matrice[nb - 1][j];
+    for (nb; nb >= 0; nb--) {
+      for (let j=0; j < 10; j++) {
+        if(nb==0){
+          this.matrice[nb][j] = 0;
+        }else{
+          this.matrice[nb][j] = this.matrice[nb - 1][j];
+        }
       }
     }
   }
