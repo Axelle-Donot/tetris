@@ -10,7 +10,7 @@ class Controller {
     this.fini=false;
     this.grille = new ModelGrille();
     this.creationTetrominos();
-   // lancement();
+    lancement();
 
   }
   creationTetrominos() {
