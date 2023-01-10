@@ -10,7 +10,7 @@ class Controller {
     this.fini=false;
     this.grille = new ModelGrille();
     this.creationTetrominos();
-    lancement();
+   // lancement();
 
   }
   creationTetrominos() {
@@ -38,12 +38,10 @@ class Controller {
     if(!this.fini){
 
       if(!this.grille.verifTetrominos(this.tetrominos)){
-        console.log("test")
       this.grille.descendre(this.tetrominos);
       this.verifierLigneEntiere()
 
       }else{
-        console.log('1')
         this.verifierLigneEntiere()
       }
 
@@ -80,7 +78,8 @@ class Controller {
   }
 
   score() {
-    this.grille.score();
+    
+    return this.grille.score;
   }
 
   verifierLigneEntiere() {
@@ -91,7 +90,8 @@ class Controller {
       setTimeout(function() {
         app.timing=false;
         app.grille.suppLigne(app.ligneASupp);
-    },3000)
+        app.ligneASupp=false
+    },300)
     this.creationTetrominos();
 
     }else if (this.grille.verifTetrominos(this.tetrominos)){
@@ -106,5 +106,9 @@ class Controller {
     }
   }
 
-  rotation() {}
+  rotation() {
+    this.grille.rotation(this.tetrominos)
+    afficherGrille()
+
+  }
 }

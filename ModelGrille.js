@@ -236,7 +236,16 @@ class ModelGrille {
 
   //supprimer les lignes
   suppLigne(tab) {
-    this.calculScore(tab.length);
+    let cpt =0 ;
+    for(let i = 0;i<25;i++){
+      if(tab[i]!==undefined){
+        cpt++;
+      }
+    }
+    if(cpt>0){
+      this.calculScore(cpt);
+    }
+
     for (let i = 0; i < tab.length; i++) {
       this.modifLigne(tab[i]);
     }
@@ -262,7 +271,7 @@ class ModelGrille {
       3: 300,
       4: 1200,
     };
-    this.score += diffScore[nb];
+    this.score =this.score + diffScore[nb];
   }
 
   rotation(tetrominos) {
@@ -278,7 +287,24 @@ class ModelGrille {
       }
     }
     tetrominos.rotation();
-    tetrominos.getNewMatrice();
+    let val=0;
+    for(let j=tetrominos.nbColonne-1;j>=0;j--){
+
+       if(j+coordT[1]>9){
+         val++;
+        }
+    }
+    if(val>0){
+      if((tetrominos.nbLigne==1 || tetrominos.nbLigne==4 ) && val<=2){
+        tetrominos.coordonnes[1]= tetrominos.coordonnes[1]-va
+      } else if(tetrominos.nbLigne==1 || tetrominos.nbLigne==4 ){
+        tetrominos.rotation();
+      }else{
+        tetrominos.rotation();
+        tetrominos.rotation();
+        tetrominos.rotation();
+      }
+    }    
     this.ajouterTetrominos(tetrominos);
   }
 }

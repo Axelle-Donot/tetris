@@ -70,7 +70,7 @@ function afficherGrille() {
       }
   //  }
   }
- 
+  score()
 }
 
 document.addEventListener("keydown", function (event) {
@@ -82,6 +82,8 @@ document.addEventListener("keydown", function (event) {
     app.descendre();
   } else if (event.code == "Space" &&  app.fini==false) {
     app.descendreRapidement();
+  }else if (event.code == "ArrowUp" &&  app.fini==false) {
+    app.rotation();
   }
   app.verifierLigneEntiere();
 });
@@ -115,6 +117,8 @@ function supprimerLignes(tabLignes){
 }
 
   function score(){
+    contextGrille.font = "20px serif";
+    contextGrille.fillText(app.score(), 400, 220)
 
   }
 
@@ -127,5 +131,15 @@ function supprimerLignes(tabLignes){
      
   function arret(){
     clearInterval(arret)
+    var contextFin= canvas.getContext("2d");
+    var contextText =canvas.getContext("2d");
+    contextFin.fillStyle="grey"
+
+    contextFin.fillRect(50, 150, largeur * 20, largeur * 10);
+    contextText.fillStyle = 'Black';
+    contextText.font = "20px serif";
+    contextText.fillText("VOUS AVEZ PERDU", 150,250);
+
+
   }
 

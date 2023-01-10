@@ -67,6 +67,8 @@ class ModelTetrominos {
       }
     }
     this.matrice = invers;
+    this.getNewMatrice();
+
   }
 
   get() {
