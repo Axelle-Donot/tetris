@@ -270,15 +270,15 @@ class ModelGrille {
     for (let i = 0; i < tetrominos.nbLigne; i++) {
       for (let j = 0; j < tetrominos.nbColonne; j++) {
         if (
-          tetrominos.petiteT[i][j] > 0 &&
-          this.matrice[coordT[0] * i][coordT[1] * j] > 0
+          tetrominos.matricePetite[i][j] > 0 &&
+          this.matrice[coordT[0]+ i][coordT[1] + j] > 0
         ) {
-          this.matrice[coordT[0] * i][coordT[1] * j] = 0;
+          this.matrice[coordT[0] +i][coordT[1] + j] = 0;
         }
       }
     }
     tetrominos.rotation();
     tetrominos.getNewMatrice();
-    this.matrice.ajouterTetrominos(tetrominos);
+    this.ajouterTetrominos(tetrominos);
   }
 }
