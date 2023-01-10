@@ -1,5 +1,6 @@
 //const largeur = 25;
 var tps = 1000
+var interval=0;
 // changement de façon de faire
 // lire chaque case et hop le rectangle est fait selon la couleur
 couleur = {
@@ -73,13 +74,13 @@ function afficherGrille() {
 }
 
 document.addEventListener("keydown", function (event) {
-  if (event.code == "ArrowRight") {
+  if (event.code == "ArrowRight" && app.fini==false) {
     app.droite();
-  } else if (event.code == "ArrowLeft") {
+  } else if (event.code == "ArrowLeft" && app.fini==false) {
     app.gauche();
-  } else if (event.code == "ArrowDown") {
+  } else if (event.code == "ArrowDown" && app.fini==false) {
     app.descendre();
-  } else if (event.code == "Space") {
+  } else if (event.code == "Space" &&  app.fini==false) {
     app.descendreRapidement();
   }
   app.verifierLigneEntiere();
@@ -93,7 +94,6 @@ function supprimerLignes(tabLignes){
   for (let i = 0; i < 25; i++) {
     for (let j = 0; j < 10; j++) {
       if(tabLignes.includes(i)){
-        console.log(tabLignes)
         context2.fillRect(
           100+largeur * j + 2,
           50+largeur * i + 2,
@@ -120,9 +120,12 @@ function supprimerLignes(tabLignes){
 
   //faire descendre les cases toutes les tps
   function lancement(){
-    setInterval(function(){
-      app.descendre()
-    },tps); 
+     interval = setInterval(function(){
+        app.descendre()
+      },tps); 
     }
      
+  function arret(){
+    clearInterval(arret)
+  }
 

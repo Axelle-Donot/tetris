@@ -27,18 +27,46 @@ class ModelGrille {
 
   ajouterTetrominos(tetrominos) {
     let coordT = tetrominos.coordonnes;
+    let cpt = 0;
+    let cptLigne= new Array(tetrominos.nbLigne)
 
     for (let i = 0; i < tetrominos.nbLigne; i++) {
       for (let j = 0; j < tetrominos.nbColonne; j++) {
         if (
-          tetrominos.matricePetite[i][j] != 0 &&
-          this.matrice[coordT[0] + i][coordT[1] + j] == 0
-        ) {
-          this.matrice[coordT[0] + i][coordT[1] + j] =
-            tetrominos.matricePetite[i][j];
+          this.matrice[coordT[0] + i][coordT[1] + j] > 0
+        && !cptLigne.includes(i)) {
+          cptLigne[cpt]=i;
+          cpt++;
         }
       }
     }
+
+    if(cpt==0 ){
+      for (let i = 0; i < tetrominos.nbLigne; i++) {
+        for (let j = 0; j < tetrominos.nbColonne; j++) {
+          if (
+            tetrominos.matricePetite[i][j] != 0 &&
+            this.matrice[coordT[0] + i][coordT[1] + j] == 0
+          ) {
+            this.matrice[coordT[0] + i][coordT[1] + j] =
+              tetrominos.matricePetite[i][j];
+          }
+        }
+      }
+    }else{
+      for (let i = 0; i < tetrominos.nbLigne; i++) {
+        for (let j = 0; j < tetrominos.nbColonne; j++) {
+          if (
+            coordT[0]+i-cptLigne[0]>=0 && tetrominos.matricePetite[i][j] != 0 &&
+            this.matrice[coordT[0] + i -cptLigne[0]][coordT[1] + j] == 0
+          ) {
+            this.matrice[coordT[0] + i-cptLigne[0]][coordT[1] + j] =
+              tetrominos.matricePetite[i][j];
+          }
+        }
+      }
+    }
+    
   }
   //fonction decaller a droite
   deplacerDroite(tetrominos) {
@@ -154,7 +182,12 @@ class ModelGrille {
   }
 
   //verifie si la grille est terminee ou non
-  verifGrilleFIni() {}
+  verifGrilleFini(tetrominos) {
+    if(this.verifTetrominos(tetrominos) && tetrominos.coordonnes[0]==0){
+      return true;
+    }
+    return false;
+  }
 
   
   //verifier si le tetrominos a fini sa descente pour passer au suivant
