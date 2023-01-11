@@ -169,8 +169,11 @@ function supprimerLignes(tabLignes){
   //faire descendre les cases toutes les tps
   function lancement(){
      interval = setInterval(function(){
+      if(app.boolDescente){
         app.descendre()
         app.verifierLigneEntiere();
+      }
+  
 
       },tps); 
     }
