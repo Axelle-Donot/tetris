@@ -11,36 +11,45 @@ class Controller {
     this.grille = new ModelGrille();
     this.creationTetrominos();
     lancement();
-
+    this.boolDescente=true
   }
   creationTetrominos() {
-    if(!this.fini){
-      if(!this.timing){
+    if(!this.fini && !this.timing){
         this.tetrominos = new ModelTetrominos();
-      this.grille.ajouterTetrominos(this.tetrominos);
-      afficherGrille();
-      this.verifierFinGrille()
-      }
+        this.grille.ajouterTetrominos(this.tetrominos);
+        afficherGrille();
+        this.verifierFinGrille()
     }
   }
 
   descendreRapidement() {
    if(!this.fini){
-      if(!this.grille.verifTetrominos(this.tetrominos)){
-          this.grille.descendreRapidement(this.tetrominos);
+      if(!this.grille.verifTetrominos(this.tetrominos) && this.boolDescente){
+          this.boolDescente=false;
+          let interval = setInterval(function(){
+            app.grille.descendre(app.tetrominos);
+            descenteTetrominos(app.tetrominos)
+            let val = app.grille.verifTetrominos(app.tetrominos)
+            if(val || app.tetrominos.coordonnes[0]+app.tetrominos.nbLigne-1 >= 24){
+              clearInterval(interval)
+              app.boolDescente=true
+              app.verifierLigneEntiere()
+              app.verifierFinGrille()
+            }
+          },40)
+      }else{
+        this.verifierLigneEntiere()
+        this.verifierFinGrille()
       }
-      this.verifierLigneEntiere()
-      this.verifierFinGrille()
     }
   }
 
+  
   descendre() {
     if(!this.fini){
-
       if(!this.grille.verifTetrominos(this.tetrominos)){
-      this.grille.descendre(this.tetrominos);
-      this.verifierLigneEntiere()
-
+        this.grille.descendre(this.tetrominos);
+        this.verifierLigneEntiere()
       }else{
         this.verifierLigneEntiere()
       }
@@ -52,7 +61,6 @@ class Controller {
 
   droite() {
     if(!this.fini){
-
       if(!this.grille.verifTetrominos(this.tetrominos)){
       this.grille.deplacerDroite(this.tetrominos);
       }else{
@@ -65,7 +73,6 @@ class Controller {
 
   gauche() {
     if(!this.fini){
-
       if(!this.grille.verifTetrominos(this.tetrominos)){
         this.grille.deplacerGauche(this.tetrominos);
       }else{
@@ -78,7 +85,10 @@ class Controller {
   }
 
   score() {
-    
+    if(this.grille.score>0){
+      tps = (-1) * this.grille.score +1000
+      console.log(tps)
+    }
     return this.grille.score;
   }
 
@@ -91,9 +101,8 @@ class Controller {
         app.timing=false;
         app.grille.suppLigne(app.ligneASupp);
         app.ligneASupp=false
-    },300)
-    this.creationTetrominos();
-
+    },200)
+     this.creationTetrominos();
     }else if (this.grille.verifTetrominos(this.tetrominos)){
       this.creationTetrominos();
     }
@@ -109,6 +118,5 @@ class Controller {
   rotation() {
     this.grille.rotation(this.tetrominos)
     afficherGrille()
-
   }
 }

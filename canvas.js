@@ -1,5 +1,5 @@
 //const largeur = 25;
-var tps = 1000
+var tps = 1500
 var interval=0;
 // changement de façon de faire
 // lire chaque case et hop le rectangle est fait selon la couleur
@@ -8,7 +8,7 @@ couleur = {
   2: "yellow",
   3: "purple",
   4: "orange",
-  5: "darkblue",
+  5: "pink",
   6: "red",
   7: "green",
 };
@@ -50,11 +50,7 @@ function creerGrille() {
 
 
 function afficherGrille() {
-//  if(!app.timing){
-    context.clearRect(0, 0, canvas.width, canvas.height);
-    canvas = document.getElementById("mycanvas");
-    context = canvas.getContext("2d");
-  
+  context.clearRect(0, 0, canvas.width, canvas.height);
     creerGrille()
     for (let i = 0; i < 25; i++) {
       for (let j = 0; j < 10; j++) {
@@ -68,42 +64,63 @@ function afficherGrille() {
           );
         }
       }
-  //  }
   }
   score()
 }
 
 document.addEventListener("keydown", function (event) {
-  if (event.code == "ArrowRight" && app.fini==false) {
+  if (event.code == "ArrowRight" && !app.fini && app.boolDescente) {
     app.droite();
-  } else if (event.code == "ArrowLeft" && app.fini==false) {
+    app.verifierLigneEntiere();
+
+  } else if (event.code == "ArrowLeft" && !app.fini && app.boolDescente) {
     app.gauche();
-  } else if (event.code == "ArrowDown" && app.fini==false) {
+    app.verifierLigneEntiere();
+
+  } else if (event.code == "ArrowDown" && !app.fini && app.boolDescente) {
     app.descendre();
-  } else if (event.code == "Space" &&  app.fini==false) {
+    app.verifierLigneEntiere();
+
+  } else if (event.code == "Space" && !app.fini && app.boolDescente) {
+    console.log("Test")
     app.descendreRapidement();
-  }else if (event.code == "ArrowUp" &&  app.fini==false) {
+  }else if (event.code == "ArrowUp" && !app.fini && app.boolDescente) {
     app.rotation();
+    app.verifierLigneEntiere();
   }
-  app.verifierLigneEntiere();
+
 });
 
-function supprimerLignes(tabLignes){
+function descenteTetrominos(tetrominos){
+  let t = tetrominos
+  let tabI = new Array (4);
+  let tabJ = new Array (4);
+  let cpt=0;
+  for(let i=0;i<t.nbLigne;i++){
+    for(let j=0;j<t.nbColonne;j++){
+      if(t.matricePetite[i][j]>0){
+        tabI[cpt]=i+t.coordonnes[0];
+        tabJ[cpt]=j+t.coordonnes[1];
+        cpt++;
+      }
+    }
+  }
+  cpt=0
   context.clearRect(0, 0, canvas.width, canvas.height);
-//  canvas = document.getElementById("mycanvas");
-  //context = canvas.getContext("2d");
+  context2.clearRect(0, 0, canvas.width, canvas.height);
   creerGrille()
   for (let i = 0; i < 25; i++) {
     for (let j = 0; j < 10; j++) {
-      if(tabLignes.includes(i)){
+      if(cpt<4 && tabI[cpt]==i && tabJ[cpt]==j){
+        context2.fillStyle=couleur[app.grille.matrice[i][j]];
         context2.fillRect(
           100+largeur * j + 2,
           50+largeur * i + 2,
           largeur - 4,
           largeur - 4
         );
-      }
-      else if (app.grille.matrice[i][j] > 0) {
+        cpt++
+      }else if (app.grille.matrice[i][j] > 0) {
         context.strokeStyle = couleur[app.grille.matrice[i][j]];
         context.strokeRect(
           100+largeur * j + 2,
@@ -114,18 +131,47 @@ function supprimerLignes(tabLignes){
       }
     }
   }
+  score()
+}
+
+function supprimerLignes(tabLignes){
+  context.clearRect(0, 0, canvas.width, canvas.height);
+  creerGrille()
+  for (let i = 0; i < 25; i++) {
+    for (let j = 0; j < 10; j++) {
+      if(tabLignes.includes(i)){
+        context.fillRect(
+          100+largeur * j + 2,
+          50+largeur * i + 2,
+          largeur - 4,
+          largeur - 4
+        );
+      }else if (app.grille.matrice[i][j] > 0) {
+        context.strokeStyle = couleur[app.grille.matrice[i][j]];
+        context.strokeRect(
+          100+largeur * j + 2,
+          50+largeur * i + 2,
+          largeur - 4,
+          largeur - 4
+        );
+      }
+    }
+  }
+  score()
 }
 
   function score(){
     contextGrille.font = "20px serif";
+    contextGrille.fillStyle = 'white';
     contextGrille.fillText(app.score(), 400, 220)
-
   }
 
   //faire descendre les cases toutes les tps
   function lancement(){
      interval = setInterval(function(){
         app.descendre()
+        app.verifierLigneEntiere();
+
       },tps); 
     }
      

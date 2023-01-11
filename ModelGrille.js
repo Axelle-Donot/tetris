@@ -266,7 +266,7 @@ class ModelGrille {
 
   calculScore(nb) {
     let diffScore = {
-      1: 40,
+      1: 50,
       2: 100,
       3: 300,
       4: 1200,
@@ -296,7 +296,7 @@ class ModelGrille {
     }
     if(val>0){
       if((tetrominos.nbLigne==1 || tetrominos.nbLigne==4 ) && val<=2){
-        tetrominos.coordonnes[1]= tetrominos.coordonnes[1]-va
+        tetrominos.coordonnes[1]= tetrominos.coordonnes[1]-val
       } else if(tetrominos.nbLigne==1 || tetrominos.nbLigne==4 ){
         tetrominos.rotation();
       }else{
