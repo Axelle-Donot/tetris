@@ -82,7 +82,6 @@ document.addEventListener("keydown", function (event) {
     app.verifierLigneEntiere();
 
   } else if (event.code == "Space" && !app.fini && app.boolDescente) {
-    console.log("Test")
     app.descendreRapidement();
   }else if (event.code == "ArrowUp" && !app.fini && app.boolDescente) {
     app.rotation();
@@ -168,13 +167,14 @@ function supprimerLignes(tabLignes){
 
   //faire descendre les cases toutes les tps
   function lancement(){
+     if(interval!==undefined){
+      clearInterval(interval)
+     }
      interval = setInterval(function(){
       if(app.boolDescente){
         app.descendre()
         app.verifierLigneEntiere();
       }
-  
-
       },tps); 
     }
      

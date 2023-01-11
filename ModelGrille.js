@@ -269,7 +269,7 @@ class ModelGrille {
       1: 50,
       2: 100,
       3: 300,
-      4: 1200,
+      4: 500,
     };
     this.score =this.score + diffScore[nb];
   }
