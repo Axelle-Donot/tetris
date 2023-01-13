@@ -88,7 +88,7 @@ class Controller {
 
   score() {
     if (this.grille.score > 0) {
-      tps = (1 / (this.grille.score * 20)) * 1800000;
+      tps = (1 / (this.grille.score * 10)) * 1800000;
       lancement();
     }
     return this.grille.score;
