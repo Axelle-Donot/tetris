@@ -1,127 +1,71 @@
 class Controller {
-  constructor(modelTetrominos, modelGrille, view) {
-    this.modelTetrominos = modelTetrominos;
-    this.modelGrille = modelGrille;
+  constructor(model, view) {
+    this.model = model;
     this.view = view;
+
+    this.bindDisplayLancement = this.bindDisplayLancement.bind(this)
+    this.model.bindDisplayLancement(this.bindDisplayLancement);
+
+    this.bindDisplaySupprimerLigne = this.bindDisplaySupprimerLigne.bind(this)
+    this.model.bindDisplaySupprimerLigne(this.bindDisplaySupprimerLigne);
+
+    this.bindDisplayAfficherGrille = this.bindDisplayAfficherGrille.bind(this)
+    this.model.bindDisplayAfficherGrille(this.bindDisplayAfficherGrille);
+
+    this.bindDisplayDescendreTetrominos = this.bindDisplayDescendreTetrominos.bind(this)
+    this.model.bindDisplayDescendreTetrominos(this.bindDisplayDescendreTetrominos);
+
+    this.bindDisplayArret = this.bindDisplayArret.bind(this)
+    this.model.bindDisplayArret(this.bindDisplayArret);
+
+  }
+  
+// View
+  bindDisplayLancement(){
+    this.view.lancement()
   }
 
-  creationGrille() {
-    this.timing = false;
-    tps = 1500;
-    this.fini = false;
-    this.grille = new ModelGrille();
-    this.creationTetrominos();
-    lancement();
-    this.boolDescente = true;
-  }
-  creationTetrominos() {
-    if (!this.fini && !this.timing) {
-      this.tetrominos = new ModelTetrominos();
-      this.grille.ajouterTetrominos(this.tetrominos);
-      afficherGrille();
-      this.verifierFinGrille();
-    }
+  bindDisplaySupprimerLigne(tabLignes){
+    this.view.supprimerLignes(tabLignes)
   }
 
-  descendreRapidement() {
-    if (!this.fini) {
-      if (!this.grille.verifTetrominos(this.tetrominos) && this.boolDescente) {
-        this.boolDescente = false;
-        let interval = setInterval(function () {
-          app.grille.descendre(app.tetrominos);
-          descenteTetrominos(app.tetrominos);
-          let val = app.grille.verifTetrominos(app.tetrominos);
-          if (
-            val ||
-            app.tetrominos.coordonnes[0] + app.tetrominos.nbLigne - 1 >= 24
-          ) {
-            clearInterval(interval);
-            app.boolDescente = true;
-            app.verifierLigneEntiere();
-            app.verifierFinGrille();
-          }
-        }, 40);
-      } else {
-        this.verifierLigneEntiere();
-        this.verifierFinGrille();
-      }
-    }
+  bindDisplayAfficherGrille(){
+    this.view.afficherGrille();
   }
 
-  descendre() {
-    if (!this.fini) {
-      if (!this.grille.verifTetrominos(this.tetrominos)) {
-        this.grille.descendre(this.tetrominos);
-        this.verifierLigneEntiere();
-      } else {
-        this.verifierLigneEntiere();
-      }
-
-      afficherGrille();
-      this.verifierFinGrille();
-    }
+  bindDisplayDescendreTetrominos(tetrominos){
+    this.view.descenteTetrominos(tetrominos);
   }
 
-  droite() {
-    if (!this.fini) {
-      if (!this.grille.verifTetrominos(this.tetrominos)) {
-        this.grille.deplacerDroite(this.tetrominos);
-      } else {
-        this.verifierLigneEntiere();
-      }
-      afficherGrille();
-      this.verifierFinGrille();
-    }
+  bindDisplayArret(){
+    this.view.arret()
   }
 
-  gauche() {
-    if (!this.fini) {
-      if (!this.grille.verifTetrominos(this.tetrominos)) {
-        this.grille.deplacerGauche(this.tetrominos);
-      } else {
-        this.verifierLigneEntiere();
-      }
-      afficherGrille();
-      this.verifierFinGrille();
-    }
+// Model
+  bindGetDescendre () {
+    this.model.getDescendre();
   }
 
-  score() {
-    if (this.grille.score > 0) {
-      tps = (1 / (this.grille.score * 10)) * 1800000;
-      lancement();
-    }
-    return this.grille.score;
+  bindGetDroite() {
+    this.model.getDroite();
   }
 
-  verifierLigneEntiere() {
-    this.ligneASupp = this.grille.verifLigne();
-    if (
-      this.ligneASupp != false &&
-      this.grille.verifTetrominos(this.tetrominos)
-    ) {
-      this.timing = true;
-      supprimerLignes(this.ligneASupp);
-      setTimeout(function () {
-        app.timing = false;
-        app.grille.suppLigne(app.ligneASupp);
-        app.ligneASupp = false;
-      }, 200);
-      this.creationTetrominos();
-    } else if (this.grille.verifTetrominos(this.tetrominos)) {
-      this.creationTetrominos();
-    }
+  bindGetGauche () {
+    this.model.getGauche();
   }
 
-  verifierFinGrille() {
-    if (this.grille.verifGrilleFini(this.tetrominos)) {
-      this.fini = true;
-      arret();
-    }
+  bindGetRotation () {
+    this.model.getRotation();
+  }
+  bindGetScore () {
+    return this.model.getScore();
+  }
+  bindGetAfficherGrille () {
+    this.model.getAfficherGrille();
+  }
+  
+  bindGetDescendreRapidement () {
+    this.model.getDescendreRapidement();
   }
 
-  rotation() {
-    this.grille.rotation(this.tetrominos);
-    afficherGrille();
-  }
 }

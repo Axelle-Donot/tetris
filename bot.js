@@ -1,6 +1,5 @@
 const appBot = new Controller(
-  new ModelTetrominos(),
-  new ModelGrille(),
+  new Model(),
   new View()
 );
 

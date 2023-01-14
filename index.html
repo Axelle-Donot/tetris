@@ -31,23 +31,18 @@
   </head>
   <body id="body">
     <canvas width="576" height="576" id="mycanvas"></canvas>
-
-    <script src="canvas.js"></script>
+    <script src="canvas.js"></script> 
     <script src="action.js"></script>
     <script src="ModelTetrominos.js"></script>
+    <script src="Model.js"></script>
     <script src="ModelGrille.js"></script>
     <script src="Controller.js"></script>
     <script src="View.js"></script>
     <script src="bot.js"></script>
 
-    <script>
-      const app = new Controller(
-        new ModelTetrominos(),
-        new ModelGrille(),
-        new View()
-      );
+    <script> const app = new Controller(new Model(), new View()) 
     </script>
 
-    <button id="bouton" onclick="app.creationGrille()">Lancer Partie</button>
+    <button id="bouton" onclick="app.bindGetAfficherGrille()">Lancer Partie</button>
   </body>
 </html>
