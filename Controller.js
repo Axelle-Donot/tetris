@@ -2,7 +2,6 @@ class Controller {
   constructor(model, view) {
     this.model = model;
     this.view = view;
-
     this.bindDisplayLancement = this.bindDisplayLancement.bind(this)
     this.model.bindDisplayLancement(this.bindDisplayLancement);
 
@@ -22,7 +21,7 @@ class Controller {
   
 // View
   bindDisplayLancement(){
-    this.view.lancement()
+    this.lancement()
   }
 
   bindDisplaySupprimerLigne(tabLignes){
@@ -41,6 +40,20 @@ class Controller {
     this.view.arret()
   }
 
+    //faire descendre les cases toutes les tps
+    lancement(){
+      if(this.interval!==undefined){
+       clearInterval(this.interval)
+      }
+      this.interval = setInterval(function(){
+       if(app.model.boolDescente){
+         app.bindGetDescendre()
+         app.model.verifierLigneEntiere();
+       }
+       },this.model.tps); 
+     }
+      
+
 // Model
   bindGetDescendre () {
     this.model.getDescendre();
@@ -58,7 +71,7 @@ class Controller {
     this.model.getRotation();
   }
   bindGetScore () {
-    return this.model.getScore();
+    return this.model.getScore(this);
   }
   bindGetAfficherGrille () {
     this.model.getAfficherGrille();

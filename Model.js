@@ -1,5 +1,7 @@
 class Model{
     constructor(){
+      this.boolDescente=true
+      this.tps=1800
     }
 
      bindDisplayLancement (callback) {
@@ -73,10 +75,11 @@ class Model{
 
     }
      
-     getScore(){
+     getScore(view){
         if(this.grille.score>0){
 
-          app.view.tps = (1 / (this.grille.score * 10)) * 1800000;
+          this.tps = (1 / (this.grille.score * 10)) * 1800000;
+          console.log(this.tps)
           this.DisplayLancement()
         }
         return this.grille.score;
@@ -105,7 +108,7 @@ class Model{
                     app.model.verifierLigneEntiere()
                     app.model.verifierFinGrille()
                   }
-                },40)
+                },30)
             }else{
               this.verifierLigneEntiere()
               this.verifierFinGrille()
@@ -132,7 +135,7 @@ class Model{
                 app.model.timing=false;
                 app.model.grille.suppLigne(app.model.ligneASupp);
                 app.model.ligneASupp=false
-            },200)
+            },10)
             this.creationTetrominos();
         }else if (this.grille.verifTetrominos(this.tetrominos)){
             this.creationTetrominos();

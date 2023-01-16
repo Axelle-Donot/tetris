@@ -295,15 +295,7 @@ class ModelGrille {
         }
     }
     if(val>0){
-      if((tetrominos.nbLigne==1 || tetrominos.nbLigne==4 ) && val<=2){
-        tetrominos.coordonnes[1]= tetrominos.coordonnes[1]-val
-      } else if(tetrominos.nbLigne==1 || tetrominos.nbLigne==4 ){
-        tetrominos.rotation();
-      }else{
-        tetrominos.rotation();
-        tetrominos.rotation();
-        tetrominos.rotation();
-      }
+      tetrominos.coordonnes[1]= tetrominos.coordonnes[1]-val
     }    
     this.ajouterTetrominos(tetrominos);
   }

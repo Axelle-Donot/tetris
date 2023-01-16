@@ -154,19 +154,6 @@ supprimerLignes(tabLignes)
     this.contextGrille.fillText(app.bindGetScore(), 400, 120)
   }
 
-  //faire descendre les cases toutes les tps
-  lancement(){
-     if(this.interval!==undefined){
-      clearInterval(this.interval)
-     }
-     this.interval = setInterval(function(){
-      if(app.model.boolDescente){
-        app.bindGetDescendre()
-        app.model.verifierLigneEntiere();
-      }
-      },this.tps); 
-    }
-     
   arret(){
     var contextFin= this.canvas.getContext("2d");
     var contextText =this.canvas.getContext("2d");
