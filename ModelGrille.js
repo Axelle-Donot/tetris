@@ -25,23 +25,38 @@ class ModelGrille {
     return string;
   }
 
+  supprimerTetrominos(tetrominos) {
+    let coordT = tetrominos.coordonnes;
+    for (let i = 0; i < tetrominos.nbLigne; i++) {
+      for (let j = 0; j < tetrominos.nbColonne; j++) {
+        if (
+          tetrominos.matricePetite[i][j] > 0 &&
+          this.matrice[coordT[0] + i][coordT[1] + j] > 0
+        ) {
+          this.matrice[coordT[0] + i][coordT[1] + j] = 0;
+        }
+      }
+    }
+  }
+
   ajouterTetrominos(tetrominos) {
     let coordT = tetrominos.coordonnes;
     let cpt = 0;
-    let cptLigne= new Array(tetrominos.nbLigne)
+    let cptLigne = new Array(tetrominos.nbLigne);
 
     for (let i = 0; i < tetrominos.nbLigne; i++) {
       for (let j = 0; j < tetrominos.nbColonne; j++) {
         if (
-          this.matrice[coordT[0] + i][coordT[1] + j] > 0
-        && !cptLigne.includes(i)) {
-          cptLigne[cpt]=i;
+          this.matrice[coordT[0] + i][coordT[1] + j] > 0 &&
+          !cptLigne.includes(i)
+        ) {
+          cptLigne[cpt] = i;
           cpt++;
         }
       }
     }
 
-    if(cpt==0 ){
+    if (cpt == 0) {
       for (let i = 0; i < tetrominos.nbLigne; i++) {
         for (let j = 0; j < tetrominos.nbColonne; j++) {
           if (
@@ -53,20 +68,20 @@ class ModelGrille {
           }
         }
       }
-    }else{
+    } else {
       for (let i = 0; i < tetrominos.nbLigne; i++) {
         for (let j = 0; j < tetrominos.nbColonne; j++) {
           if (
-            coordT[0]+i-cptLigne[0]>=0 && tetrominos.matricePetite[i][j] != 0 &&
-            this.matrice[coordT[0] + i -cptLigne[0]][coordT[1] + j] == 0
+            coordT[0] + i - cptLigne[0] >= 0 &&
+            tetrominos.matricePetite[i][j] != 0 &&
+            this.matrice[coordT[0] + i - cptLigne[0]][coordT[1] + j] == 0
           ) {
-            this.matrice[coordT[0] + i-cptLigne[0]][coordT[1] + j] =
+            this.matrice[coordT[0] + i - cptLigne[0]][coordT[1] + j] =
               tetrominos.matricePetite[i][j];
           }
         }
       }
     }
-    
   }
   //fonction decaller a droite
   deplacerDroite(tetrominos) {
@@ -176,31 +191,32 @@ class ModelGrille {
 
   descendreRapidement(tetrominos) {
     let bool = true;
-    while (bool && tetrominos.coordonnes[0]+tetrominos.nbLigne-1 < 24) {
+    while (bool && tetrominos.coordonnes[0] + tetrominos.nbLigne - 1 < 24) {
       bool = this.descendre(tetrominos);
     }
   }
 
   //verifie si la grille est terminee ou non
   verifGrilleFini(tetrominos) {
-    if(this.verifTetrominos(tetrominos) && tetrominos.coordonnes[0]==0){
+    if (this.verifTetrominos(tetrominos) && tetrominos.coordonnes[0] == 0) {
       return true;
     }
     return false;
   }
 
-  
   //verifier si le tetrominos a fini sa descente pour passer au suivant
   verifTetrominos(tetrominos) {
-
     let coordT = tetrominos.coordonnes;
     if (coordT[0] + tetrominos.nbLigne >= 25) {
       return true;
     } else {
-
       for (let i = 0; i < tetrominos.nbLigne; i++) {
         for (let j = 0; j < tetrominos.nbColonne; j++) {
-          if (  tetrominos.matricePetite[i][j] > 0 && (i == tetrominos.nbLigne - 1 ||  tetrominos.matricePetite[i + 1][j] == 0) ) {
+          if (
+            tetrominos.matricePetite[i][j] > 0 &&
+            (i == tetrominos.nbLigne - 1 ||
+              tetrominos.matricePetite[i + 1][j] == 0)
+          ) {
             if (this.matrice[i + coordT[0] + 1][j + coordT[1]] > 0) {
               return true;
             }
@@ -236,13 +252,13 @@ class ModelGrille {
 
   //supprimer les lignes
   suppLigne(tab) {
-    let cpt =0 ;
-    for(let i = 0;i<25;i++){
-      if(tab[i]!==undefined){
+    let cpt = 0;
+    for (let i = 0; i < 25; i++) {
+      if (tab[i] !== undefined) {
         cpt++;
       }
     }
-    if(cpt>0){
+    if (cpt > 0) {
       this.calculScore(cpt);
     }
 
@@ -254,10 +270,10 @@ class ModelGrille {
   //modifier les lignes
   modifLigne(nb) {
     for (nb; nb >= 0; nb--) {
-      for (let j=0; j < 10; j++) {
-        if(nb==0){
+      for (let j = 0; j < 10; j++) {
+        if (nb == 0) {
           this.matrice[nb][j] = 0;
-        }else{
+        } else {
           this.matrice[nb][j] = this.matrice[nb - 1][j];
         }
       }
@@ -271,7 +287,7 @@ class ModelGrille {
       3: 300,
       4: 500,
     };
-    this.score =this.score + diffScore[nb];
+    this.score = this.score + diffScore[nb];
   }
 
   rotation(tetrominos) {
@@ -280,23 +296,30 @@ class ModelGrille {
       for (let j = 0; j < tetrominos.nbColonne; j++) {
         if (
           tetrominos.matricePetite[i][j] > 0 &&
-          this.matrice[coordT[0]+ i][coordT[1] + j] > 0
+          this.matrice[coordT[0] + i][coordT[1] + j] > 0
         ) {
-          this.matrice[coordT[0] +i][coordT[1] + j] = 0;
+          this.matrice[coordT[0] + i][coordT[1] + j] = 0;
         }
       }
     }
     tetrominos.rotation();
-    let val=0;
-    for(let j=tetrominos.nbColonne-1;j>=0;j--){
-
-       if(j+coordT[1]>9){
-         val++;
-        }
+    let val = 0;
+    for (let j = tetrominos.nbColonne - 1; j >= 0; j--) {
+      if (j + coordT[1] > 9) {
+        val++;
+      }
     }
-    if(val>0){
-      tetrominos.coordonnes[1]= tetrominos.coordonnes[1]-val
-    }    
+    if (val > 0) {
+      if ((tetrominos.nbLigne == 1 || tetrominos.nbLigne == 4) && val <= 2) {
+        tetrominos.coordonnes[1] = tetrominos.coordonnes[1] - val;
+      } else if (tetrominos.nbLigne == 1 || tetrominos.nbLigne == 4) {
+        tetrominos.rotation();
+      } else {
+        tetrominos.rotation();
+        tetrominos.rotation();
+        tetrominos.rotation();
+      }
+    }
     this.ajouterTetrominos(tetrominos);
   }
 }
