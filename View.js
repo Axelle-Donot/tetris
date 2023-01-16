@@ -168,7 +168,6 @@ supprimerLignes(tabLignes)
     }
      
   arret(){
-    clearInterval(arret)
     var contextFin= this.canvas.getContext("2d");
     var contextText =this.canvas.getContext("2d");
     contextFin.fillStyle="grey"
