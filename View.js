@@ -37,7 +37,6 @@ creerGrille() {
   this.contextGrille.strokeRect(100, 50, this.largeur * 10, this.largeur * 25);
   this.contextGrille.font = "20px serif";
   this.contextGrille.fillText("SCORE", 400, 200);
-  this.contextGrille.fillText("Active IA", 400, 300);
   
   this.contextGrille.beginPath();
   this.contextGrille.strokeStyle = "grey";
