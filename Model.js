@@ -79,7 +79,6 @@ class Model{
         if(this.grille.score>0){
 
           this.tps = (1 / (this.grille.score * 10)) * 1800000;
-          console.log(this.tps)
           this.DisplayLancement()
         }
         return this.grille.score;

@@ -56,11 +56,12 @@ class ModelTetrominos {
         }
       }
     }
+
     this.getNewMatrice();
   }
 
   rotation() {
-    let invers = [[], [], [], []];
+    let invers = [[0,0,0,0], [0,0,0,0], [0,0,0,0], [0,0,0,0]];
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
         invers[i][j] = this.matrice[3 - j][i];
@@ -86,13 +87,18 @@ class ModelTetrominos {
     }
     this.nbColonne = 4 - tailleColonneVide;
     this.nbLigne = 4 - tailleLigneVide;
+
+  
+
     this.matricePetite = new Array(this.nbLigne);
     for (let a = 0; a < this.nbLigne; a++) {
       this.matricePetite[a] = new Array(this.nbColonne);
     }
+
     for (let i = 0; i < 4; i++) {
       for (let j = 0; j < 4; j++) {
         if (!nbLigneVide.includes(i) && !nbColonneVide.includes(j)) {
+
           this.matricePetite[valLigne][valColonne] = this.matrice[i][j];
           if (valColonne + 1 > this.nbColonne - 1) {
             valColonne = 0;

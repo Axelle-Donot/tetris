@@ -40,7 +40,7 @@ class Controller {
     this.view.arret()
   }
 
-    //faire descendre les cases toutes les tps
+   //faire descendre les cases toutes les tps
     lancement(){
       if(this.interval!==undefined){
        clearInterval(this.interval)

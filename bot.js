@@ -17,31 +17,37 @@ for (let i = 0; i < taillePop; i++) {
   }
 
   // position des tetrominos
-  population[i].ajouterTetrominos(tetrominos);
+ // population[i].ajouterTetrominos(tetrominos);
 
   console.log({ pop: population[i] });
 
-  for (let k = 0; k < scores.length; k++) {
+  for (let k = 0; k < 1; k++) {
     for (let l = 0; l < scores[k].length; l++) {
       console.log("----------------------------------------");
       tetrominos.coordonnes = [0, l];
+      population[i].ajouterTetrominos(tetrominos);
 
       console.log(tetrominos.coordonnes);
-
-      population[i].descendreRapidement(tetrominos);
+  
+      console.log(mat)
+        population[i].descendreRapidement(tetrominos);
+  
 
       console.log(k, l);
       console.log(tetrominos.coordonnes);
 
       console.log("----------------------------------------");
-
       //calcule scors
       //suppr le tetrominos
-
       population[i].supprimerTetrominos(tetrominos);
+
+      console.log("----------------------------------------");
+
+
       tetrominos.coordonnes = [0, 0];
+
     }
-    population[i].rotation(tetrominos);
+    //population[i].rotation(tetrominos);
   }
 }
 

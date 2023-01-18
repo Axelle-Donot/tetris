@@ -152,18 +152,36 @@ class ModelGrille {
 
   //fonction descendre d'une case
   descendre(tetrominos) {
-    let coordT = tetrominos.coordonnes;
+    console.log(tetrominos.matrice)
+    console.log(tetrominos.matricePetite)
     let petiteT = tetrominos.matricePetite;
     let nbVoisin = 0;
-    if (coordT[0] + tetrominos.nbLigne - 1 < 24) {
+    if (tetrominos.coordonnes[0] + tetrominos.nbLigne - 1 < 24) {
       for (let i = 0; i < tetrominos.nbLigne; i++) {
         for (let j = 0; j < tetrominos.nbColonne; j++) {
           if (
             petiteT[i][j] > 0 &&
             (i == tetrominos.nbLigne - 1 || petiteT[i + 1][j] == 0)
           ) {
-            if (this.matrice[coordT[0] + i + 1][coordT[1] + j] > 0) {
+         /*   console.log(tetrominos.nbLigne - 1)
+            console.log("i : "+i)
+            console.log("j"+j)
+
+            if(i == tetrominos.nbLigne - 1){
+              console.log("TA MER ELE I ")
+            }else{
+              console.log("ta pute"+petiteT[i + 1][j])
+
+            }*/
+            if (this.matrice[tetrominos.coordonnes[0] + i + 1][tetrominos.coordonnes[1] + j] > 0) {
+            /*  console.log(tetrominos.coordonnes)             
+               console.log(tetrominos.coordonnes[0] + i + 1)
+              console.log(tetrominos.coordonnes[1] + j)
+              console.log(petiteT[i+1][j])
+              console.log(this.matrice[tetrominos.coordonnes[0] + i + 1][tetrominos.coordonnes[1] + j])
+              console.log("te  baise")*/
               nbVoisin++;
+
             }
           }
         }
@@ -172,7 +190,7 @@ class ModelGrille {
         for (let i = tetrominos.nbLigne - 1; i >= 0; i--) {
           for (let j = 0; j < tetrominos.nbColonne; j++) {
             if (tetrominos.matricePetite[i][j] != 0) {
-              this.matrice[coordT[0] + i + 1][coordT[1] + j] =
+              this.matrice[tetrominos.coordonnes[0] + i + 1][tetrominos.coordonnes[1] + j] =
                 tetrominos.matricePetite[i][j];
               this.matrice[tetrominos.coordonnes[0] + i][
                 tetrominos.coordonnes[1] + j
