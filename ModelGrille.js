@@ -152,8 +152,7 @@ class ModelGrille {
 
   //fonction descendre d'une case
   descendre(tetrominos) {
-    console.log(tetrominos.matrice)
-    console.log(tetrominos.matricePetite)
+
     let petiteT = tetrominos.matricePetite;
     let nbVoisin = 0;
     if (tetrominos.coordonnes[0] + tetrominos.nbLigne - 1 < 24) {
@@ -163,25 +162,8 @@ class ModelGrille {
             petiteT[i][j] > 0 &&
             (i == tetrominos.nbLigne - 1 || petiteT[i + 1][j] == 0)
           ) {
-         /*   console.log(tetrominos.nbLigne - 1)
-            console.log("i : "+i)
-            console.log("j"+j)
-
-            if(i == tetrominos.nbLigne - 1){
-              console.log("TA MER ELE I ")
-            }else{
-              console.log("ta pute"+petiteT[i + 1][j])
-
-            }*/
             if (this.matrice[tetrominos.coordonnes[0] + i + 1][tetrominos.coordonnes[1] + j] > 0) {
-            /*  console.log(tetrominos.coordonnes)             
-               console.log(tetrominos.coordonnes[0] + i + 1)
-              console.log(tetrominos.coordonnes[1] + j)
-              console.log(petiteT[i+1][j])
-              console.log(this.matrice[tetrominos.coordonnes[0] + i + 1][tetrominos.coordonnes[1] + j])
-              console.log("te  baise")*/
               nbVoisin++;
-
             }
           }
         }
