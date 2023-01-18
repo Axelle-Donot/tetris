@@ -1,6 +1,6 @@
 const appBot = new Controller(new Model(), new View());
 
-const taillePop = 10;
+const taillePop = 1;
 var population = Array();
 
 for (let i = 0; i < taillePop; i++) {
@@ -19,24 +19,40 @@ for (let i = 0; i < taillePop; i++) {
   // position des tetrominos
   population[i].ajouterTetrominos(tetrominos);
 
-  console.log({ population });
+  console.log({ pop: population[i] });
+
   for (let k = 0; k < scores.length; k++) {
     for (let l = 0; l < scores[k].length; l++) {
+      console.log("----------------------------------------");
       tetrominos.coordonnes = [0, l];
 
-      console.log({ avantdescendre: population });
+      console.log(tetrominos.coordonnes);
+
       population[i].descendreRapidement(tetrominos);
+
+      console.log(k, l);
+      console.log(tetrominos.coordonnes);
+
+      console.log("----------------------------------------");
 
       //calcule scors
       //suppr le tetrominos
 
       population[i].supprimerTetrominos(tetrominos);
       tetrominos.coordonnes = [0, 0];
-
-      console.log({ aprèsdescendre: population });
     }
     population[i].rotation(tetrominos);
   }
 }
 
-console.log({ population });
+const score = (grille, ligne) => {
+  const minligne = 0;
+  const maxligne = 0;
+
+  //ligne la plus haut
+  //nombre ligne complete
+  //nombre de trous
+  //Variation hauteur
+};
+
+console.log({ pop: population });
