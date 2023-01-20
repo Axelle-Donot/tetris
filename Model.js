@@ -35,7 +35,7 @@ class Model{
             }else{
               this.verifierLigneEntiere()
             }
-            this.DisplayAfficherGrille();
+            this.DisplayAfficherGrille(this.grille.matrice);
             this.verifierFinGrille()
             this.verifierLigneEntiere();
 
@@ -49,7 +49,7 @@ class Model{
             }else{
               this.verifierLigneEntiere()
             }
-            this.DisplayAfficherGrille();
+            this.DisplayAfficherGrille(this.grille.matrice);
             this.verifierFinGrille()
             this.verifierLigneEntiere();
           }
@@ -62,7 +62,7 @@ class Model{
             }else{
               this.verifierLigneEntiere()
             }
-            this.DisplayAfficherGrille();
+            this.DisplayAfficherGrille(this.grille.matrice);
             this.verifierFinGrille()
             this.verifierLigneEntiere();
           }
@@ -70,7 +70,7 @@ class Model{
 
      getRotation(){
         this.grille.rotation(this.tetrominos)
-        this.DisplayAfficherGrille();
+        this.DisplayAfficherGrille(this.grille.matrice);
         this.verifierLigneEntiere();
 
     }
@@ -119,7 +119,7 @@ class Model{
          if(!this.fini && !this.timing){
             this.tetrominos = new ModelTetrominos();
             this.grille.ajouterTetrominos(this.tetrominos);
-            this.DisplayAfficherGrille();
+            this.DisplayAfficherGrille(this.grille.matrice);
             this.verifierFinGrille()
         }
       }

@@ -28,8 +28,8 @@ class Controller {
     this.view.supprimerLignes(tabLignes)
   }
 
-  bindDisplayAfficherGrille(){
-    this.view.afficherGrille();
+  bindDisplayAfficherGrille(matrice){
+    this.view.afficherGrille(matrice);
   }
 
   bindDisplayDescendreTetrominos(tetrominos){

@@ -57,14 +57,14 @@ class View {
     }
   }
 
-  afficherGrille() {
+  afficherGrille(matrice) {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.creerGrille();
     for (let i = 0; i < 25; i++) {
       for (let j = 0; j < 10; j++) {
-        if (app.model.grille.matrice[i][j] > 0) {
+        if (matrice[i][j] > 0) {
           this.context.strokeStyle =
-            this.couleur[app.model.grille.matrice[i][j]];
+            this.couleur[matrice[i][j]];
           this.context.lineWidth = 2;
           this.context.strokeRect(
             100 + this.largeur * j + 2,
