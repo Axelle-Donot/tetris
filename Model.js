@@ -75,7 +75,7 @@ class Model{
 
     }
      
-     getScore(view){
+     getScore(){
         if(this.grille.score>0){
 
           this.tps = (1 / (this.grille.score * 10)) * 1800000;
@@ -98,14 +98,15 @@ class Model{
             if(!this.grille.verifTetrominos(this.tetrominos) && this.boolDescente){
                 this.boolDescente=false;
                 let interval = setInterval(function(){
-                  app.model.grille.descendre(app.model.tetrominos);
-                  app.bindDisplayDescendreTetrominos(app.model.tetrominos,app.model.grille.matrice)
-                  let val = app.model.grille.verifTetrominos(app.model.tetrominos)
-                  if(val || app.model.tetrominos.coordonnes[0]+app.model.tetrominos.nbLigne-1 >= 24){
+                  let modele = app.getModel()
+                  modele.grille.descendre(modele.tetrominos);
+                  app.bindDisplayDescendreTetrominos(modele.tetrominos,modele.grille.matrice)
+                  let val = modele.grille.verifTetrominos(modele.tetrominos)
+                  if(val || modele.tetrominos.coordonnes[0]+modele.tetrominos.nbLigne-1 >= 24){
                     clearInterval(interval)
-                    app.model.boolDescente=true
-                    app.model.verifierLigneEntiere()
-                    app.model.verifierFinGrille()
+                    modele.boolDescente=true
+                    modele.verifierLigneEntiere()
+                    modele.verifierFinGrille()
                   }
                 },30)
             }else{
@@ -131,15 +132,17 @@ class Model{
             
             this.DisplaySupprimerLigne(this.ligneASupp,this.grille.matrice)
             setTimeout(function() {
-                app.model.timing=false;
-                app.model.grille.suppLigne(app.model.ligneASupp);
-                app.model.ligneASupp=false
+                let modele = app.getModel();
+                modele.timing=false;
+                modele.grille.suppLigne(app.model.ligneASupp);
+                modele.ligneASupp=false
             },10)
             this.creationTetrominos();
         }else if (this.grille.verifTetrominos(this.tetrominos)){
             this.creationTetrominos();
         }
     }
+
 
     verifierFinGrille(){
         if(this.grille.verifGrilleFini(this.tetrominos)){

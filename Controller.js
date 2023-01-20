@@ -17,6 +17,7 @@ class Controller {
     this.bindDisplayArret = this.bindDisplayArret.bind(this)
     this.model.bindDisplayArret(this.bindDisplayArret);
 
+
   }
   
 // View
@@ -81,4 +82,7 @@ class Controller {
     this.model.getDescendreRapidement();
   }
 
+  getModel(){
+    return this.model;
+  }
 }

@@ -18,6 +18,7 @@ class View {
     };
     this.initView();
   }
+  
 
   initView() {
     this.creerGrille();
