@@ -78,7 +78,7 @@ class View {
     this.score();
   }
 
-  descenteTetrominos(tetrominos) {
+  descenteTetrominos(tetrominos,matrice) {
     let t = tetrominos;
     let tabI = new Array(4);
     let tabJ = new Array(4);
@@ -100,7 +100,7 @@ class View {
       for (let j = 0; j < 10; j++) {
         if (cpt < 4 && tabI[cpt] == i && tabJ[cpt] == j) {
           this.context2.fillStyle =
-            this.couleur[app.model.grille.matrice[i][j]];
+            this.couleur[matrice[i][j]];
           this.context2.fillRect(
             100 + this.largeur * j + 2,
             50 + this.largeur * i + 2,
@@ -108,9 +108,9 @@ class View {
             this.largeur - 4
           );
           cpt++;
-        } else if (app.model.grille.matrice[i][j] > 0) {
+        } else if (matrice[i][j] > 0) {
           this.context.strokeStyle =
-            this.couleur[app.model.grille.matrice[i][j]];
+            this.couleur[matrice[i][j]];
           this.context.lineWidth = 2;
           this.context.strokeRect(
             100 + this.largeur * j + 2,
@@ -124,7 +124,7 @@ class View {
     this.score();
   }
 
-  supprimerLignes(tabLignes) {
+  supprimerLignes(tabLignes,matrice) {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.creerGrille();
     for (let i = 0; i < 25; i++) {
@@ -136,9 +136,9 @@ class View {
             this.largeur - 4,
             this.largeur - 4
           );
-        } else if (app.model.grille.matrice[i][j] > 0) {
+        } else if (matrice[i][j] > 0) {
           this.context.strokeStyle =
-            this.couleur[app.model.grille.matrice[i][j]];
+            this.couleur[matrice[i][j]];
           this.context.lineWidth = 2;
           this.context.strokeRect(
             100 + this.largeur * j + 2,

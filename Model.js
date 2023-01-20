@@ -99,7 +99,7 @@ class Model{
                 this.boolDescente=false;
                 let interval = setInterval(function(){
                   app.model.grille.descendre(app.model.tetrominos);
-                  app.bindDisplayDescendreTetrominos(app.model.tetrominos)
+                  app.bindDisplayDescendreTetrominos(app.model.tetrominos,app.model.grille.matrice)
                   let val = app.model.grille.verifTetrominos(app.model.tetrominos)
                   if(val || app.model.tetrominos.coordonnes[0]+app.model.tetrominos.nbLigne-1 >= 24){
                     clearInterval(interval)
@@ -129,7 +129,7 @@ class Model{
         if (this.ligneASupp != false && this.grille.verifTetrominos(this.tetrominos)) {
             this.timing=true;
             
-            this.DisplaySupprimerLigne(this.ligneASupp)
+            this.DisplaySupprimerLigne(this.ligneASupp,this.grille.matrice)
             setTimeout(function() {
                 app.model.timing=false;
                 app.model.grille.suppLigne(app.model.ligneASupp);
