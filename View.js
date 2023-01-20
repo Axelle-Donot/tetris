@@ -152,6 +152,7 @@ class View {
     }
     this.score();
   }
+  
 
   score() {
     this.contextGrille.font = "20px serif";

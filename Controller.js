@@ -71,6 +71,7 @@ class Controller {
   bindGetRotation () {
     this.model.getRotation();
   }
+  
   bindGetScore () {
     return this.model.getScore(this);
   }

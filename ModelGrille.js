@@ -227,7 +227,7 @@ class ModelGrille {
     return false;
   }
   //retourne le nombre de ligne complete dans un tableau
-  verifLigne() {
+  /*verifLigne() {
     let nbParLigne;
     let valeurTab = 0;
     let tab = new Array(25);
@@ -248,12 +248,48 @@ class ModelGrille {
     } else {
       return false;
     }
-  }
+  }*/
 
+  verifLigne() {
+    let nbParLigne;
+    let valeurTab = 0;
+    for (let i = 0; i < 25; i++) {
+      for (let j = 0; j < 10; j++) {
+        if (this.matrice[i][j] > 0) {
+          nbParLigne++;
+        }
+      }
+      if (nbParLigne == 10) {
+        valeurTab++;
+      }
+      nbParLigne = 0;
+    }
+    
+    let tab = new Array(valeurTab);
+    let cpt=0;
+    for (let i = 0; i < 25; i++) {
+      for (let j = 0; j < 10; j++) {
+        if (this.matrice[i][j] > 0) {
+          nbParLigne++;
+        }
+      }
+      if (nbParLigne == 10) {
+        tab[cpt]=i;
+        cpt++;
+      }
+      nbParLigne = 0;
+    }
+
+    if (tab[0] !== undefined) {
+      return tab;
+    } else {
+      return false;
+    }
+  }
   //supprimer les lignes
   suppLigne(tab) {
     let cpt = 0;
-    for (let i = 0; i < 25; i++) {
+    for (let i = 0; i < tab.length; i++) {
       if (tab[i] !== undefined) {
         cpt++;
       }
