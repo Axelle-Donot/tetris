@@ -1,6 +1,6 @@
 const appBot = new Controller(new Model(), new View());
 
-const taillePop = 1;
+const taillePop = 10;
 var population = Array();
 
 for (let i = 0; i < taillePop; i++) {
@@ -38,23 +38,40 @@ const score = (grille) => {
     difference += Math.abs(hauteur(grille, i) - hauteur(grille, i + 1));
   }
 
-  for (let i = 0; i <= 23; i++) {
-    for (let j = 0; j < 10; j++) {
-      if (grille[i][j] !== 0 && grille[i + 1][j] === 0) {
+  for (let i = 0; i < 10; i++) {
+    for (let j = hauteur(grille, i) + 1; j < 25; j++) {
+      // console.log({ i: i, j: j });
+      // console.log({ piece: grille[j][i] });
+      if (grille[j][i] === 0) {
         nombretroue++;
       }
     }
   }
 
-  console.log({ nombreligne: nombreligne });
-  console.log({ nombretroue: nombretroue });
-  console.log({ maxligne: maxligne });
-  console.log({ difference: difference });
+  // for (let i = 0; i < 10; i++) {
+  //   for (let j = 0; j < 24; j++) {
+  //     if (grille[j][i] !== 0) {
+  //       for (let b = j + 1; b <= 24; b++) {
+  //         if (grille[b][i] === 0) {
+  //           console.log({ b: b, i: i });
+  //           console.log({ piece: grille[j][i] });
+  //           console.log({ dessous: grille[b][i] });
+  //           nombretroue++;
+  //         }
+  //       }
+  //     }
+  //   }
+  // }
+
+  // console.log({ nombreligne: nombreligne });
+  // console.log({ nombretroue: nombretroue });
+  // console.log({ maxligne: maxligne });
+  // console.log({ difference: difference });
 
   return nombretroue * 2 + (25 - maxligne) - nombreligne;
 };
 
-const generation = 100;
+const generation = 50;
 
 for (let h = 0; h < generation; h++) {
   for (let i = 0; i < taillePop; i++) {
@@ -116,16 +133,22 @@ for (let h = 0; h < generation; h++) {
 
     population[i].suppLigne(population[i].verifLigne());
 
-    let vide = "";
-    for (let z = 0; z < 25; z++) {
-      for (let j = 0; j < 10; j++) {
-        vide += population[i].matrice[z][j] + " ";
-      }
-      vide += "\n";
-    }
+    population[i].verifGrilleFini(tetrominos);
 
-    console.log(vide);
+    // let vide = "";
+    // for (let z = 0; z < 25; z++) {
+    //   for (let j = 0; j < 10; j++) {
+    //     vide += population[i].matrice[z][j] + " ";
+    //   }
+    //   vide += "\n";
+    // }
+
+    // console.log(vide);
   }
 }
 
 console.log({ pop: population });
+
+for (let i = 0; i < taillePop; i++) {
+  console.log(score(population[i].matrice));
+}
