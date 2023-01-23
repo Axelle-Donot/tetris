@@ -87,8 +87,6 @@ const score = (grille, indice) => {
 
 const bot = () => {
 
-
-
 const nbPiece = 200;
 const generation = 1;
 

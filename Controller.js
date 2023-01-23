@@ -1,7 +1,8 @@
 class Controller {
-  constructor(model, view) {
+  constructor(model, view,isBot) {
     this.model = model;
     this.view = view;
+    this.IsBot=isBot;
     this.bindDisplayLancement = this.bindDisplayLancement.bind(this)
     this.model.bindDisplayLancement(this.bindDisplayLancement);
 
