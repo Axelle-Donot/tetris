@@ -75,12 +75,15 @@ class Model{
 
     }
      
-     getScore(){
+     getScore(controller){
     
         if(this.grille.score>0){
 
           this.tps = (1 / (this.grille.score * 10)) * 1800000;
-          this.DisplayLancement()
+          if(controller.IsBot == false){
+            this.DisplayLancement()
+
+          }
         }
         return this.grille.score;
      }
