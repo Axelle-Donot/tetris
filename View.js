@@ -58,7 +58,7 @@ class View {
     }
   }
 
-  afficherGrille(matrice) {
+  afficherGrille(matrice,controller) {
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.creerGrille();
     for (let i = 0; i < 25; i++) {
@@ -76,10 +76,12 @@ class View {
         }
       }
     }
-    this.score();
+    console.log(controller)
+
+    this.score(controller);
   }
 
-  descenteTetrominos(tetrominos,matrice) {
+  descenteTetrominos(tetrominos,matrice,controller) {
     let t = tetrominos;
     let tabI = new Array(4);
     let tabJ = new Array(4);
@@ -122,10 +124,12 @@ class View {
         }
       }
     }
-    this.score();
+    console.log(controller)
+
+    this.score(controller);
   }
 
-  supprimerLignes(tabLignes,matrice) {
+  supprimerLignes(tabLignes,matrice,controller){
     this.context.clearRect(0, 0, this.canvas.width, this.canvas.height);
     this.creerGrille();
     for (let i = 0; i < 25; i++) {
@@ -150,14 +154,14 @@ class View {
         }
       }
     }
-    this.score();
+    this.score(controller);
   }
   
 
-  score() {
+  score(controller) {
     this.contextGrille.font = "20px serif";
     this.contextGrille.fillStyle = "white";
-    this.contextGrille.fillText(app.bindGetScore(), 400, 120);
+    this.contextGrille.fillText(controller.bindGetScore(), 400, 120);
   }
 
   arret() {

@@ -26,15 +26,15 @@ class Controller {
   }
 
   bindDisplaySupprimerLigne(tabLignes,matrice){
-    this.view.supprimerLignes(tabLignes,matrice)
+    this.view.supprimerLignes(tabLignes,matrice,this);
   }
 
   bindDisplayAfficherGrille(matrice){
-    this.view.afficherGrille(matrice);
+    this.view.afficherGrille(matrice,this);
   }
 
   bindDisplayDescendreTetrominos(tetrominos,matrice){
-    this.view.descenteTetrominos(tetrominos,matrice);
+    this.view.descenteTetrominos(tetrominos,matrice,this);
   }
 
   bindDisplayArret(){
