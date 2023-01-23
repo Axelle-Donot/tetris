@@ -31,3 +31,17 @@ document.addEventListener("keydown", function (event) {
   }
 
 });
+
+
+  document.getElementById("boutonBot").addEventListener("click",function(event) {
+  if(document.getElementById("boutonBot").innerHTML == "Lancer Bot"){
+    document.getElementById("boutonBot").onclick = function() {app.bindGetAfficherGrille()};
+    document.getElementById("boutonBot").innerHTML = "Arrêter Bot";
+    if(app!==undefined){
+      clearInterval(app.interval);
+    }
+  }else{
+    document.getElementById("boutonBot").onclick = function() {bot()};
+    document.getElementById("boutonBot").innerHTML = "Lancer Bot";
+  }
+});
