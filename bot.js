@@ -94,7 +94,7 @@ const generation = 1;
 
 for (let c = 0; c < generation; c++) {
   for (let i = 0; i < taillePop; i++) {
-    setInterval(() => {
+    appBot.interval = setInterval(() => {
       // for (let h = 0; h < nbPiece; h++) {
         tetrominos = new ModelTetrominos();
           if ((appBot.model.grille.verifGrilleFini(tetrominos) === false)){
