@@ -1,6 +1,6 @@
-const appBot = new Controller(new Model(), new View());
+const appBot = new Controller(new Model(), new View(),true);
 
-const taillePop = 10;
+const taillePop = 1;
 
 var population = Array();
 var scoresPop = new Array(taillePop);
@@ -90,7 +90,7 @@ const bot = () => {
 
 
 const nbPiece = 200;
-const generation = 5;
+const generation = 1;
 
 
 
@@ -151,7 +151,11 @@ for (let c = 0; c < generation; c++) {
         population[i].rotation(tetrominos);
       }
 
+    
+      appBot.bindDisplayAfficherGrille(population[i].matrice)
+      
       population[i].descendreRapidement(tetrominos);
+      
 
       population[i].suppLigne(population[i].verifLigne());
 
@@ -197,3 +201,5 @@ for (let c = 0; c < generation; c++) {
 }
 
 }
+
+bot()
