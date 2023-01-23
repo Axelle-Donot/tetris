@@ -1,4 +1,4 @@
-const appBot = new Controller(new Model(), new View(),true);
+const appBot = new Controller(new Model(), new View(), true);
 
 const taillePop = 1;
 
@@ -56,7 +56,7 @@ const score = (grille, indice) => {
       : appBot.model.grille.verifLigne().length;
 
   for (let i = 0; i < 9; i++) {
-    difference += Math.abs(hauteur(grille, i) - (hauteur(grille, i + 1) ));
+    difference += Math.abs(hauteur(grille, i) - hauteur(grille, i + 1));
   }
 
   for (let i = 0; i < 10; i++) {
@@ -84,20 +84,16 @@ const score = (grille, indice) => {
   );
 };
 
-
 const bot = () => {
+  const nbPiece = 10;
+  const generation = 1;
 
-const nbPiece = 10;
-const generation = 1;
-
-
-
-for (let c = 0; c < generation; c++) {
-  for (let i = 0; i < taillePop; i++) {
-    appBot.interval = setInterval(() => {
-      // for (let h = 0; h < nbPiece; h++) {
+  for (let c = 0; c < generation; c++) {
+    for (let i = 0; i < taillePop; i++) {
+      appBot.interval = setInterval(() => {
+        // for (let h = 0; h < nbPiece; h++) {
         tetrominos = new ModelTetrominos();
-          if ((appBot.model.grille.verifGrilleFini(tetrominos) === false)){
+        if (appBot.model.grille.verifGrilleFini(tetrominos) === false) {
           // console.log(tetrominos.matrice);
 
           // création matrice score
@@ -152,9 +148,8 @@ for (let c = 0; c < generation; c++) {
             population[i].rotation(tetrominos);
           }
 
-      
-          appBot.bindDisplayAfficherGrille(population[i].matrice)
-          
+          appBot.bindDisplayAfficherGrille(population[i].matrice);
+
           population[i].descendreRapidement(tetrominos);
 
           population[i].suppLigne(population[i].verifLigne());
@@ -169,35 +164,34 @@ for (let c = 0; c < generation; c++) {
 
           // console.log(vide);
         }
-      // }
-    },800)
+        // }
+      }, 800);
+    }
+
+    console.log({ pop: population });
+
+    // for (let i = 0; i < taillePop; i++) {
+    //   scoresPop[i] = score(population[i].matrice, i);
+    // }
+
+    // let maxScore = 0;
+    // let maxindice = 0;
+    // for (let i = 0; i < taillePop; i++) {
+    //   if (scoresPop[i] < maxScore) {
+    //     maxScore = scoresPop[i];
+    //     maxindice = i;
+    //   }
+    // }
+
+    // let maxScore2 = 0;
+    // let maxindice2 = 0;
+    // for (let i = 0; i < taillePop; i++) {
+    //   if (scoresPop[i] < maxScore && i !== maxindice) {
+    //     maxScore2 = scoresPop[i];
+    //     maxindice2 = i;
+    //   }
+    // }
+
+    // faire la moyenne des deux meilleurs
   }
-
-  console.log({ pop: population });
-
-  // for (let i = 0; i < taillePop; i++) {
-  //   scoresPop[i] = score(population[i].matrice, i);
-  // }
-
-  // let maxScore = 0;
-  // let maxindice = 0;
-  // for (let i = 0; i < taillePop; i++) {
-  //   if (scoresPop[i] < maxScore) {
-  //     maxScore = scoresPop[i];
-  //     maxindice = i;
-  //   }
-  // }
-
-  // let maxScore2 = 0;
-  // let maxindice2 = 0;
-  // for (let i = 0; i < taillePop; i++) {
-  //   if (scoresPop[i] < maxScore && i !== maxindice) {
-  //     maxScore2 = scoresPop[i];
-  //     maxindice2 = i;
-  //   }
-  // }
-
-  // faire la moyenne des deux meilleurs
-}
-
-}
+};
