@@ -76,8 +76,6 @@ class View {
         }
       }
     }
-    console.log(controller)
-
     this.score(controller);
   }
 
@@ -124,8 +122,6 @@ class View {
         }
       }
     }
-    console.log(controller)
-
     this.score(controller);
   }
 
