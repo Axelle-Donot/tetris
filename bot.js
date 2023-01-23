@@ -84,8 +84,15 @@ const score = (grille, indice) => {
   );
 };
 
+
+const bot = () => {
+
+
+
 const nbPiece = 200;
 const generation = 5;
+
+
 
 for (let c = 0; c < generation; c++) {
   for (let h = 0; h < nbPiece; h++) {
@@ -187,4 +194,6 @@ for (let c = 0; c < generation; c++) {
   }
 
   // faire la moyenne des deux meilleurs
+}
+
 }
