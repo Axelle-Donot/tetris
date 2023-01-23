@@ -170,7 +170,7 @@ for (let c = 0; c < generation; c++) {
           // console.log(vide);
         }
       // }
-    },500)
+    },800)
   }
 
   console.log({ pop: population });
@@ -201,5 +201,3 @@ for (let c = 0; c < generation; c++) {
 }
 
 }
-
-bot()
