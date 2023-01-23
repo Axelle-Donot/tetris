@@ -41,7 +41,11 @@ document.addEventListener("keydown", function (event) {
       clearInterval(app.interval);
     }
   }else{
+
     document.getElementById("boutonBot").onclick = function() {bot()};
     document.getElementById("boutonBot").innerHTML = "Lancer Bot";
+    if(appBot!==undefined && appBot.interval!==undefined){
+      clearInterval(appBot.interval);
+    }
   }
 });
